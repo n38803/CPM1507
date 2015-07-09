@@ -5,14 +5,12 @@ package DataClass;
 
 import java.io.Serializable;
 
-public class Contacts implements Serializable {
-
-    private static final long serialVersionUID = 517116325584636891L;
+public class Contacts {
 
     private String mName;
-    private int mNumber;
+    private String mNumber;
 
-    public Contacts (String _name, int _number) {
+    public Contacts (String _name, String _number) {
         mName = _name;
         mNumber = _number;
     }
@@ -21,7 +19,7 @@ public class Contacts implements Serializable {
         return mName;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return mNumber;
     }
 
