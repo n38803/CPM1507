@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="parse_app_id">YOUR_APPLICATION_ID</string>
-    <string name="parse_client_key">odMMi5MBvnooOg0cGqlaCgKfPgSp3IVrzT2WjtUy</string>
-
-    <string name="hello">Hello World, ParseStarterProjectActivity!</string>
-    <string name="app_name">ParseStarterProject</string>
-</resources>

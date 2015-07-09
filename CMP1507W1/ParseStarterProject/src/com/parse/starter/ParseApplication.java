@@ -1,4 +1,8 @@
 package com.parse.starter;
+/**
+ * Shaun Thompson - CMP1507
+ * Initial startup code credited to Parse Quick Start
+ */
 
 import android.app.Application;
 

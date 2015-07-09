@@ -1,6 +1,12 @@
 package com.parse.starter;
 
+/**
+ * Shaun Thompson - CMP1507
+ * Initial startup code credited to Parse Quick Start
+ */
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,12 +14,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.LogInCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-import java.text.ParseException;
 
 public class ParseStarterProjectActivity extends Activity {
 
@@ -28,13 +35,10 @@ public class ParseStarterProjectActivity extends Activity {
     Button loginButton;
 
     // Associated User Input Strings
-	String lPassword;
-	String lUsername;
-    String rPassword;
-    String rUsername;
-
-
-
+	String liPassword;
+	String liUsername;
+    String riPassword;
+    String riUsername;
 
 
 	/** Called when the activity is first created. */
@@ -42,22 +46,11 @@ public class ParseStarterProjectActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		//ParseObject testObject = new ParseObject("TestObject");
-		//testObject.put("foo", "bar");
-		//testObject.saveInBackground();
 
         // Login assets
         loginButton = (Button) findViewById(R.id.login);
-        lPasswordInput = (TextView) findViewById(R.id.lpassword);
         lUsernameInput = (TextView) findViewById(R.id.lusername);
-
-        // Registration assets
-		registerButton = (Button) findViewById(R.id.register);
-        rPasswordInput = (TextView) findViewById(R.id.rpassword);
-        rUsernameInput = (TextView) findViewById(R.id.rusername);
-
-
-
+        lPasswordInput = (TextView) findViewById(R.id.lpassword);
 
 
         loginButton.setOnClickListener(
@@ -65,8 +58,8 @@ public class ParseStarterProjectActivity extends Activity {
                     public void onClick(View v) {
 
                         // assisgn values
-                        lPassword = lPasswordInput.getText().toString();
-                        lUsername = lUsernameInput.getText().toString();
+                        liPassword = lPasswordInput.getText().toString();
+                        liUsername = lUsernameInput.getText().toString();
 
                         // Parse & Clear Inputs
                         LoginUser();
@@ -80,14 +73,19 @@ public class ParseStarterProjectActivity extends Activity {
 
 
 
+        // Registration assets
+        registerButton = (Button) findViewById(R.id.register);
+        rUsernameInput = (TextView) findViewById(R.id.rusername);
+        rPasswordInput = (TextView) findViewById(R.id.rpassword);
 
 		registerButton.setOnClickListener(
 				new Button.OnClickListener() {
 					public void onClick(View v) {
 
-                        // assisgn values
-						rPassword = rPasswordInput.getText().toString();
-						rUsername = rUsernameInput.getText().toString();
+                        // assisgn values to string
+                        riUsername = rUsernameInput.getText().toString();
+						riPassword = rPasswordInput.getText().toString();
+
 
                         // Parse & Clear Inputs
                         RegisterUser();
@@ -100,8 +98,8 @@ public class ParseStarterProjectActivity extends Activity {
 		);
 
 
-        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
 	}
 
@@ -111,6 +109,38 @@ public class ParseStarterProjectActivity extends Activity {
     //  LOGIN METHODS ---------------------------
 
     public void LoginUser(){
+
+
+        Log.i(
+                "USER INFO",
+                "Username: " + liUsername + "\nPassword: " + liPassword
+        );
+
+        ParseUser.logInInBackground(liUsername, liPassword, new LogInCallback() {
+            @Override
+            public void done(ParseUser parseUser, com.parse.ParseException e) {
+                if (parseUser != null) {
+                    // Hooray! The user is logged in.
+                    Toast.makeText(getApplicationContext(),
+                            liUsername + "Successfully Logged In", Toast.LENGTH_LONG).show();
+
+                    // log in user and move to contact list
+                    Intent loginIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
+                    //registerIntent.putExtra("UserActivity", "From_Register");
+                    startActivity(loginIntent);
+
+
+                } else {
+                    // Signup failed. Look at the ParseException to see what happened.
+                    Toast.makeText(getApplicationContext(),
+                            "Error With Logging In", Toast.LENGTH_LONG).show();
+
+
+                }
+
+            }
+
+        });
 
     }
 
@@ -128,12 +158,12 @@ public class ParseStarterProjectActivity extends Activity {
     public void RegisterUser(){
 
         ParseUser user = new ParseUser();
-        user.setUsername(rUsername);
-        user.setPassword(rPassword);
+        user.setUsername(riUsername);
+        user.setPassword(riPassword);
 
         Log.i(
-                "LOGIN INFO",
-                "Username: " + rUsername + "\nPassword: " + rPassword
+                "REGISTERED USER",
+                "Username: " + riUsername + "\nPassword: " + riPassword
         );
 
         user.signUpInBackground(new SignUpCallback() {
@@ -144,7 +174,14 @@ public class ParseStarterProjectActivity extends Activity {
                 if (e == null) {
                     // Hooray! Let them use the app now.
                     Toast.makeText(getApplicationContext(),
-                            rUsername + "Successfully Created", Toast.LENGTH_LONG).show();
+                            riUsername + "Successfully Created", Toast.LENGTH_LONG).show();
+
+                    // log in user and move to contact list
+                    Intent registerIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
+                    //registerIntent.putExtra("UserActivity", "From_Register");
+                    startActivity(registerIntent);
+
+
                 } else {
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong

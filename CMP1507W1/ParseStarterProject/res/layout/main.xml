@@ -5,20 +5,22 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="LOGIN"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight=".2"
-        android:textStyle="bold|italic" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_weight=".5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="USER LOGIN"
+            android:textSize="20pt"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold" />
+
 
         <EditText
             android:layout_width="wrap_content"
@@ -26,8 +28,7 @@
             android:inputType="textPersonName"
             android:hint="Username"
             android:ems="10"
-            android:id="@+id/lusername"
-            android:layout_weight=".5"/>
+            android:id="@+id/lusername"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -35,65 +36,81 @@
             android:inputType="textPersonName"
             android:hint="Password"
             android:ems="10"
-            android:id="@+id/lpassword"
-            android:layout_weight=".5"/>
+            android:id="@+id/lpassword"/>
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stay Logged In"
+            android:id="@+id/checkbox" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:id="@+id/login"/>
 
     </LinearLayout>
 
-    <Button
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/login"/>
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:layout_weight=".5">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:layout_gravity="center_horizontal"
-        android:layout_weight=".3"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="REGISTER"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold|italic" />
-
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Username"
-            android:ems="10"
-            android:id="@+id/rusername"
-            android:layout_weight=".5"/>
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="15pt"
+            android:text="REGISTER NEW USER"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold" />
 
-        <EditText
-            android:layout_width="wrap_content"
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Password"
-            android:ems="10"
-            android:id="@+id/rpassword"
-            android:layout_weight=".5"/>
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-    </LinearLayout>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Username"
+                android:ems="10"
+                android:id="@+id/rusername"
+                android:layout_weight=".5"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/register"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Password"
+                android:ems="10"
+                android:id="@+id/rpassword"
+                android:layout_weight=".5"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:id="@+id/register"/>
+
+        </LinearLayout>
 
 
 </LinearLayout>

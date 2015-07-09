@@ -32,6 +32,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".UserActivity"
+            android:label="Review your Contacts" >
+        </activity>
+
+        <activity
+            android:name=".AddActivity"
+            android:label="Add to your Contacts" >
+        </activity>
+
+
     </application>
 
 </manifest>
