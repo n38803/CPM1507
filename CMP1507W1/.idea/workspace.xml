@@ -30,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/UserActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3478261">
-              <caret line="117" column="58" selection-start-line="117" selection-start-column="58" selection-end-line="117" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="127" column="52" selection-start-line="127" selection-start-column="52" selection-end-line="128" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1906#5685#0" expanded="true" />
@@ -57,6 +57,22 @@
                 <element signature="method#PopulateArray#0;class#UserActivity#0" expanded="false" />
                 <element signature="method#TrackUser#0;class#UserActivity#0" expanded="false" />
                 <element signature="method#RetrieveObjects#0;class#UserActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParseStarterProjectActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/ParseStarterProjectActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.49275362">
+              <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+              <folding>
+                <element signature="e#3576#4188#0" expanded="true" />
+                <element signature="e#4187#4188#0" expanded="true" />
+                <element signature="method#ClearLoginInput#0;class#ParseStarterProjectActivity#0" expanded="false" />
+                <element signature="e#5571#6333#0" expanded="true" />
+                <element signature="e#6332#6333#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1552,8 +1568,8 @@
         <option value="$PROJECT_DIR$/ParseStarterProject/src/DataClass/Contacts.java" />
         <option value="$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/AddActivity.java" />
         <option value="$PROJECT_DIR$/ParseStarterProject/src/DataClass/ContactAdapter.java" />
-        <option value="$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/ParseStarterProjectActivity.java" />
         <option value="$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/UserActivity.java" />
+        <option value="$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/ParseStarterProjectActivity.java" />
       </list>
     </option>
   </component>
@@ -2204,22 +2220,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/ParseStarterProjectActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.097561">
-          <caret line="139" column="50" selection-start-line="139" selection-start-column="50" selection-end-line="139" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#ClearLoginInput#0;class#ParseStarterProjectActivity#0" expanded="false" />
-            <element signature="method#RegisterUser#0;class#ParseStarterProjectActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/UserActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3478261">
-          <caret line="117" column="58" selection-start-line="117" selection-start-column="58" selection-end-line="117" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="52" selection-start-line="127" selection-start-column="52" selection-end-line="128" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1906#5685#0" expanded="true" />
@@ -2242,6 +2246,20 @@
             <element signature="method#PopulateArray#0;class#UserActivity#0" expanded="false" />
             <element signature="method#TrackUser#0;class#UserActivity#0" expanded="false" />
             <element signature="method#RetrieveObjects#0;class#UserActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/ParseStarterProjectActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49275362">
+          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+          <folding>
+            <element signature="e#3576#4188#0" expanded="true" />
+            <element signature="e#4187#4188#0" expanded="true" />
+            <element signature="method#ClearLoginInput#0;class#ParseStarterProjectActivity#0" expanded="false" />
+            <element signature="e#5571#6333#0" expanded="true" />
+            <element signature="e#6332#6333#0" expanded="true" />
           </folding>
         </state>
       </provider>

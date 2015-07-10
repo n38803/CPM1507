@@ -6,8 +6,10 @@ package com.parse.starter;
  */
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,8 +43,10 @@ public class ParseStarterProjectActivity extends Activity {
     String riPassword;
     String riUsername;
 
+    ProgressDialog progress;
 
-	/** Called when the activity is first created. */
+
+    /** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
@@ -121,17 +125,38 @@ public class ParseStarterProjectActivity extends Activity {
             @Override
             public void done(ParseUser parseUser, com.parse.ParseException e) {
                 if (parseUser != null) {
-                    // Hooray! The user is logged in.
-                    Toast.makeText(getApplicationContext(),
-                            "Logged in With: " + liUsername, Toast.LENGTH_LONG).show();
-
-                    // TODO - Set ACL
 
 
-                    // log in user and move to contact list
-                    Intent loginIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
-                    //registerIntent.putExtra("UserActivity", "From_Register");
-                    startActivity(loginIntent);
+                    progress = ProgressDialog.show(ParseStarterProjectActivity.this,
+                            "Welcome " + liUsername,
+                            "Logging in...",
+                            true);
+                    progress.show();
+
+                    // set time to give deleteinbackgroudn enough time to work
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+
+
+
+                            // close progress dialog
+                            progress.dismiss();
+
+                            Toast.makeText(getApplicationContext(),
+                                    "Logged in With: " + liUsername, Toast.LENGTH_LONG).show();
+
+                            // log in user and move to contact list w/time delay
+                            Intent loginIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
+                            startActivity(loginIntent);
+
+
+
+                        }}, 2000);
+
+
+
+
 
 
 
@@ -178,14 +203,34 @@ public class ParseStarterProjectActivity extends Activity {
             @Override
             public void done(com.parse.ParseException e) {
                 if (e == null) {
-                    // Hooray! Let them use the app now.
-                    Toast.makeText(getApplicationContext(),
-                            riUsername + "Successfully Created", Toast.LENGTH_LONG).show();
 
-                    // log in user and move to contact list
-                    Intent registerIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
-                    //registerIntent.putExtra("UserActivity", "From_Register");
-                    startActivity(registerIntent);
+                    progress = ProgressDialog.show(ParseStarterProjectActivity.this,
+                            "Welcome " + liUsername,
+                            "Logging in...",
+                            true);
+                    progress.show();
+
+                    // set time to give deleteinbackgroudn enough time to work
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+
+
+                            // close progress dialog
+                            progress.dismiss();
+
+                            // Hooray! Let them use the app now.
+                            Toast.makeText(getApplicationContext(),
+                                    riUsername + " Successfully Created", Toast.LENGTH_LONG).show();
+
+                            // log in user and move to contact list
+                            Intent registerIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
+                            //registerIntent.putExtra("UserActivity", "From_Register");
+                            startActivity(registerIntent);
+
+
+
+                        }}, 1000);
 
 
                 } else {
