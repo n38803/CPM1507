@@ -6,21 +6,21 @@
         jumboMode="false"
         revision="22.0.0"
         sha1="35921ead63f6cafd9f84ff178c60fe474c4b17a6">
-        <dex dex="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/build/intermediates/pre-dexed/debug/Parse-1.9.3-0c86fc4a8d8cfe677d6be584f7601b67b27a2fe1.jar" />
+        <dex dex="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/build/intermediates/pre-dexed/release/Parse-1.9.3-0c86fc4a8d8cfe677d6be584f7601b67b27a2fe1.jar" />
     </item>
     <item
         jar="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/libs/ParseCrashReporting-1.9.3.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="4b2fc26f71157545cc214e36008dae494adeda93">
-        <dex dex="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.9.3-46cce8a0a907d406078591ece3f88f728de978bd.jar" />
+        <dex dex="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/build/intermediates/pre-dexed/release/ParseCrashReporting-1.9.3-46cce8a0a907d406078591ece3f88f728de978bd.jar" />
     </item>
     <item
         jar="/Users/shaunthompson/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
         jumboMode="false"
         revision="22.0.0"
         sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-e40f2c0eb9093a452431842937c4d6a23a3ab11a.jar" />
+        <dex dex="/Users/shaunthompson/School/CPM1507/CMP1507W1/ParseStarterProject/build/intermediates/pre-dexed/release/bolts-android-1.2.0-e40f2c0eb9093a452431842937c4d6a23a3ab11a.jar" />
     </item>
 
 </items>

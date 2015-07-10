@@ -2,9 +2,11 @@ package com.parse.starter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.CountCallback;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseACL;
@@ -37,13 +40,19 @@ import DataClass.Contacts;
  */
 public class UserActivity extends Activity {
 
+
+    // UI Variables
     Button addContact;
     Button logOut;
-
     TextView title;
 
+    // Query Variables
     String thisUser;
+    Object thisObject;
+    public String qname;
+    ProgressDialog progress;
 
+    // ListView Assets
     private ParseQueryAdapter<ParseObject> mainAdapter;
     private ContactAdapter ContactParseAdapter;
     private ListView listView;
@@ -54,7 +63,6 @@ public class UserActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
-
 
 
         // Detect who is logged in
@@ -82,25 +90,83 @@ public class UserActivity extends Activity {
                 eBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        int newPosition = position+1;
-                        String cName = ContactAdapter.mContactList.get(newPosition).getName();
-                        String cNumber = ContactAdapter.mContactList.get(newPosition).getNumber();
 
-                        Log.e("TEST", "Position: " + position + " // Name: " + cName);
 
-                        Toast.makeText(getApplicationContext(),
-                                "Successfully Deleted: ", Toast.LENGTH_LONG).show();
+                                // QUERY ALL OBJECTS LISTED TO USER
+                                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(thisUser);
+                                query.findInBackground(new FindCallback<ParseObject>() {
+                                    public void done(List<ParseObject> contacts, ParseException e) {
+                                        if (e == null) {
 
-                        UpdateListView();
+                                            // equation to correct row position query
+                                            // ** this is necessary because query places newest added object as row 0 **
+                                            int cPosition = ((contacts.size() - 1) - position);
+
+                                            // assign contact name to variable based on selected row & log out
+                                            qname = contacts.get(cPosition).get("name").toString();
+                                            Log.i("DELETE", "POSITION: " + cPosition + " // NEW NAME: " + qname);
+
+
+                                            // delete objected based on user selected row
+                                            contacts.get(cPosition).deleteInBackground();
+
+
+                                            progress = ProgressDialog.show(UserActivity.this,
+                                                    "",
+                                                    "Processing...",
+                                                    true);
+                                            progress.show();
+
+                                            // set time to give deleteinbackgroudn enough time to work
+                                            Handler handler = new Handler();
+                                            handler.postDelayed(new Runnable() {
+                                                public void run() {
+
+                                                    // Update List
+                                                    UpdateListView();
+
+                                                    // close progress dialog
+                                                    progress.dismiss();
+
+                                                    Toast.makeText(getApplicationContext(),
+                                                            qname + " Successfully Deleted", Toast.LENGTH_LONG).show();
+
+                                                }}, 5000);  // 3000 milliseconds
+
+
+
+
+                                        } else {
+                                            Log.e("DELETE", "There has been an error");
+                                        }
+                                    }
+
+
+                                });
+
+
+
+
+
+
                     }
+
+
                 });
+
+
 
                 // CREATE DIALOG
                 AlertDialog error = eBuilder.create();
                 error.show();
 
 
+
+
+
             }
+
+
         });
 
         // Implement add button & action
@@ -156,6 +222,11 @@ public class UserActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(mainAdapter);
         mainAdapter.loadObjects();
+    }
+
+    public void PopulateArray(){
+
+
     }
 
 

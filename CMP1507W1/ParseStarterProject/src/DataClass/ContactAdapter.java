@@ -7,6 +7,7 @@ package DataClass;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,9 @@ import java.util.ArrayList;
 public class ContactAdapter extends ParseQueryAdapter<ParseObject> {
 
     public static ArrayList<Contacts> mContactList = new ArrayList();
+
+    String name;
+    String number;
 
     public ContactAdapter(Context context) {
 
@@ -51,15 +55,17 @@ public class ContactAdapter extends ParseQueryAdapter<ParseObject> {
 
         // Add the title view
         TextView nameView = (TextView) v.findViewById(R.id.cName);
-        String name = object.getString("name");
-        nameView.setText(name);
+        //name = object.getString("name");
+        //nameView.setText(name);
 
         TextView numberView = (TextView) v.findViewById(R.id.cNumber);
-        String number = object.getString("number");
-        numberView.setText(number);
+        //number = object.getString("number");
+        //numberView.setText(number);
 
         // create local array list
         mContactList.add(new Contacts(name, number));
+
+        Log.i("CONTACT TEST", "Iteration: " + name);
 
         return v;
     }

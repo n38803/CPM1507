@@ -123,7 +123,7 @@ public class ParseStarterProjectActivity extends Activity {
                 if (parseUser != null) {
                     // Hooray! The user is logged in.
                     Toast.makeText(getApplicationContext(),
-                            liUsername + "Successfully Logged In", Toast.LENGTH_LONG).show();
+                            "Logged in With: " + liUsername, Toast.LENGTH_LONG).show();
 
                     // TODO - Set ACL
 
