@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.ParseACL;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 /**
  * Created by shaunthompson on 7/9/15.
@@ -73,6 +75,7 @@ public class AddActivity extends Activity {
         ParseObject contact = new ParseObject(username);
         contact.put("name", name);
         contact.put("number", number);
+        contact.setACL(new ParseACL(ParseUser.getCurrentUser()));
         contact.saveInBackground();
 
 

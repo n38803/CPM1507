@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.LogInCallback;
 import com.parse.ParseAnalytics;
@@ -124,10 +125,15 @@ public class ParseStarterProjectActivity extends Activity {
                     Toast.makeText(getApplicationContext(),
                             liUsername + "Successfully Logged In", Toast.LENGTH_LONG).show();
 
+                    // TODO - Set ACL
+
+
                     // log in user and move to contact list
                     Intent loginIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
                     //registerIntent.putExtra("UserActivity", "From_Register");
                     startActivity(loginIntent);
+
+
 
 
                 } else {

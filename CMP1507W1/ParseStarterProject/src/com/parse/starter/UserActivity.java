@@ -22,9 +22,11 @@ import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import DataClass.ContactAdapter;
@@ -42,19 +44,66 @@ public class UserActivity extends Activity {
 
     String thisUser;
 
-    public static ArrayList<Contacts> mContactList;
+    private ParseQueryAdapter<ParseObject> mainAdapter;
+    private ContactAdapter ContactParseAdapter;
+    private ListView listView;
 
-    /** Called when the activity is first created. */
+
+
+    // Called when the activity is first created.
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+
+
 
         // Detect who is logged in
         title = (TextView) findViewById(R.id.userTitle);
         TrackUser();
 
+        // Initialize and/or Update Listview
+        UpdateListView();
 
-        // implement add button & action
+
+        // Enable item click to delete
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder eBuilder = new AlertDialog.Builder(UserActivity.this);
+                eBuilder.setTitle("Alert");
+                eBuilder.setMessage("Would you like to delete this item?");
+                eBuilder.setCancelable(false);
+                eBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                eBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        int newPosition = position+1;
+                        String cName = ContactAdapter.mContactList.get(newPosition).getName();
+                        String cNumber = ContactAdapter.mContactList.get(newPosition).getNumber();
+
+                        Log.e("TEST", "Position: " + position + " // Name: " + cName);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Successfully Deleted: ", Toast.LENGTH_LONG).show();
+
+                        UpdateListView();
+                    }
+                });
+
+                // CREATE DIALOG
+                AlertDialog error = eBuilder.create();
+                error.show();
+
+
+            }
+        });
+
+        // Implement add button & action
         addContact = (Button) findViewById(R.id.addContact);
         addContact.setOnClickListener(
                 new Button.OnClickListener() {
@@ -64,14 +113,12 @@ public class UserActivity extends Activity {
                         addIntent.putExtra("Username", thisUser);
                         startActivity(addIntent);
 
-
-
                     }
 
                 }
         );
 
-        // implement logout button & action
+        // Implement logout button & action
         logOut = (Button) findViewById(R.id.logOut);
         logOut.setOnClickListener(
                 new Button.OnClickListener() {
@@ -79,16 +126,38 @@ public class UserActivity extends Activity {
 
                         LogOut();
 
-
-
                     }
 
                 }
         );
 
-        RetrieveObjects();
+
+
+
+
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UpdateListView();
+    }
+
+    public void UpdateListView(){
+        // Initialize main ParseQueryAdapter
+        mainAdapter = new ParseQueryAdapter<ParseObject>(this, thisUser);
+        mainAdapter.setTextKey("name");
+
+        // Initialize the subclass of ParseQueryAdapter
+        ContactParseAdapter = new ContactAdapter(this);
+
+        // Initialize ListView and set initial view to mainAdapter
+        listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(mainAdapter);
+        mainAdapter.loadObjects();
+    }
+
 
 
 
@@ -96,11 +165,12 @@ public class UserActivity extends Activity {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
-            // do stuff with the user
 
+            // Gather username & modify title
             thisUser = currentUser.getUsername();
-
             title.setText("Logged In As: " + thisUser);
+
+
 
         } else {
             // show the signup or login screen
@@ -109,12 +179,18 @@ public class UserActivity extends Activity {
 
     }
 
+    // NO LONGER USING -------------
     public void RetrieveObjects(){
 
         Log.d("TEST: ", "you are inside retrieve objects");
 
         ParseQuery query = new ParseQuery(thisUser);
-        query.whereExists("name");
+
+
+
+
+        // find total number of entries by this user
+        /*
         query.countInBackground(new CountCallback() {
             public void done(int count, ParseException e) {
                 if (e == null) {
@@ -125,12 +201,29 @@ public class UserActivity extends Activity {
                 }
             }
         });
+        */
+
+
+        query.findInBackground(new FindCallback() {
+            @Override
+            public void done(List list, ParseException e) {
+                Log.d("RETRIEVE OBJECTS", thisUser + "List: " + list.get(4));
+            }
+
+            @Override
+            public void done(Object o, Throwable throwable) {
+
+            }
+        });
+
 
 
 
 
 
     }
+    // NO LONGER USING -------------
+
 
     public void LogOut(){
 

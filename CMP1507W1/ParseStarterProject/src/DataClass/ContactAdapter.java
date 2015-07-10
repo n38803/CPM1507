@@ -17,88 +17,51 @@ import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.UserActivity;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class ContactAdapter extends BaseAdapter {
+public class ContactAdapter extends ParseQueryAdapter<ParseObject> {
 
-    private static final long ID_CONSTANT = 0x01000000;
+    public static ArrayList<Contacts> mContactList = new ArrayList();
 
+    public ContactAdapter(Context context) {
 
-    String thisUser;
-    Context mContext;
-
-    ArrayList<ParseObject> mContactItems;
-
-    public ContactAdapter(Context context, ArrayList<ParseObject> items) {
-        mContext = context;
-        mContactItems = items;
-    }
-
-
-    @Override
-    public int getCount() {
-        return mContactItems.size();
-    }
-
-    @Override
-    public ParseObject getItem(int position) {
-        return mContactItems.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return ID_CONSTANT + position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
-        }
-
-        ParseObject contact = getItem(position);
-
-        TextView contactName = (TextView) convertView.findViewById(R.id.cName);
-        contactName.setText(contact.getString("name"));
-
-        TextView contactNumber = (TextView) convertView.findViewById(R.id.cNumber);
-        contactName.setText(contact.getString("number"));
-
-        return convertView;
-    }
-
-
-    public void GetUserInfo(){
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
-
-        thisUser = currentUser.getUsername();
-
-
-    }
-
-
-    public void RetrieveObjects(){
-
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(thisUser);
-        query.getInBackground("xWMyZ4YEGZ", new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject parseObject, com.parse.ParseException e) {
-
-            }
-
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    // object will be your game score
-                } else {
-                    // something went wrong
-                }
+        super(context, new ParseQueryAdapter.QueryFactory<ParseObject>() {
+            public ParseQuery create() {
+                // edit to further constrain query
+                return null;
             }
         });
-
     }
+
+    // Customize the layout by overriding getItemView
+    @Override
+    public View getItemView(ParseObject object, View v, ViewGroup parent) {
+        if (v == null) {
+            v = View.inflate(getContext(), R.layout.list_item, null);
+        }
+
+        super.getItemView(object, v, parent);
+
+
+        // Add the title view
+        TextView nameView = (TextView) v.findViewById(R.id.cName);
+        String name = object.getString("name");
+        nameView.setText(name);
+
+        TextView numberView = (TextView) v.findViewById(R.id.cNumber);
+        String number = object.getString("number");
+        numberView.setText(number);
+
+        // create local array list
+        mContactList.add(new Contacts(name, number));
+
+        return v;
+    }
+
 }
