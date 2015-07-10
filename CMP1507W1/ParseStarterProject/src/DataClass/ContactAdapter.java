@@ -63,10 +63,10 @@ public class ContactAdapter extends BaseAdapter {
         ParseObject contact = getItem(position);
 
         TextView contactName = (TextView) convertView.findViewById(R.id.cName);
-        contactName.setText(contact.getNumb);
+        contactName.setText(contact.getString("name"));
 
         TextView contactNumber = (TextView) convertView.findViewById(R.id.cNumber);
-        contactNumber.setText("$" + String.format("%.2f", contact.getNumber()));
+        contactName.setText(contact.getString("number"));
 
         return convertView;
     }

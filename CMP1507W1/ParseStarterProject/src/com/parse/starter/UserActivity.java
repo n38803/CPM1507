@@ -15,14 +15,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.CountCallback;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.ParseACL;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import DataClass.ContactAdapter;
+import DataClass.Contacts;
 
 /**
  * Created by shaunthompson on 7/9/15.
@@ -36,12 +42,7 @@ public class UserActivity extends Activity {
 
     String thisUser;
 
-    private ContactListener mListener;
-
-    public interface ContactListener{
-        public void viewContacts(int position);
-        public ArrayList<ParseObject> getContacts();
-    }
+    public static ArrayList<Contacts> mContactList;
 
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,6 @@ public class UserActivity extends Activity {
         // Detect who is logged in
         title = (TextView) findViewById(R.id.userTitle);
         TrackUser();
-
-        // populate listview
-        PopulateContacts();
 
 
         // implement add button & action
@@ -88,45 +86,11 @@ public class UserActivity extends Activity {
                 }
         );
 
-
-        ListView contactList = (ListView) findViewById(R.id.listView);
-        ContactAdapter adapter = new ContactAdapter(getApplicationContext(), mListener.getContacts());
-        contactList.setAdapter(adapter);
-
-
-
+        RetrieveObjects();
 
     }
 
-    public void updateListData(){
-        //update list
-        ListView contactList = (ListView) findViewById(R.id.listView);
-        BaseAdapter adapter = (BaseAdapter) contactList.getAdapter();
-        adapter.notifyDataSetChanged();
 
-
-
-        // update textview
-        TextView name = (TextView) findViewById((R.id.cName));
-        name.setText("TEST");
-
-        TextView number = (TextView) findViewById((R.id.cNumber));
-        name.setText("TEST");
-    }
-
-
-    public void PopulateContacts(){
-        // Create list of items
-        String[] myItems = {"Blue", "Green", "Purple", "Red"};
-
-        // Build Adapater
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item, myItems);
-
-        // Configure List View
-        ListView list = (ListView) findViewById(R.id.listView);
-        list.setAdapter(adapter);
-
-    }
 
     public void TrackUser(){
 
@@ -147,20 +111,24 @@ public class UserActivity extends Activity {
 
     public void RetrieveObjects(){
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery(thisUser);
-        query.getInBackground("BorazWnP6a", new GetCallback<ParseObject>() {
-            @Override
-            public void done(ParseObject parseObject, com.parse.ParseException e) {
-                if (e == null) {
-                    // object will be your game score
+        Log.d("TEST: ", "you are inside retrieve objects");
 
+        ParseQuery query = new ParseQuery(thisUser);
+        query.whereExists("name");
+        query.countInBackground(new CountCallback() {
+            public void done(int count, ParseException e) {
+                if (e == null) {
+                    // The count request succeeded. Log the count
+                    Log.d("RETRIEVE OBJECTS", thisUser + " has " + count + " contacts.");
                 } else {
-                    // something went wrong
+                    // The request failed
                 }
             }
-
-
         });
+
+
+
+
 
     }
 
