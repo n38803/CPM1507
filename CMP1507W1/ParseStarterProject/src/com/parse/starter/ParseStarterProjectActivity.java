@@ -7,12 +7,14 @@ package com.parse.starter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,13 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 
 public class ParseStarterProjectActivity extends Activity {
 
@@ -32,6 +41,9 @@ public class ParseStarterProjectActivity extends Activity {
 	TextView lUsernameInput;
     TextView rPasswordInput;
     TextView rUsernameInput;
+
+    String user;
+    String pass;
 
     // Buttons
     Button registerButton;
@@ -44,12 +56,15 @@ public class ParseStarterProjectActivity extends Activity {
     String riUsername;
 
     ProgressDialog progress;
+    CheckBox checkbox;
 
 
     /** Called when the activity is first created. */
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+        Log.i("STARTER", "Test: " + user);
 
 
         // Login assets
@@ -58,49 +73,51 @@ public class ParseStarterProjectActivity extends Activity {
         lPasswordInput = (TextView) findViewById(R.id.lpassword);
 
 
-        loginButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+            loginButton.setOnClickListener(
+                    new Button.OnClickListener() {
+                        public void onClick(View v) {
 
-                        // assisgn values
-                        liPassword = lPasswordInput.getText().toString();
-                        liUsername = lUsernameInput.getText().toString();
+                            // assisgn values
+                            liPassword = lPasswordInput.getText().toString();
+                            liUsername = lUsernameInput.getText().toString();
 
-                        // Parse & Clear Inputs
-                        LoginUser();
-                        ClearLoginInput();
+                            // Parse & Clear Inputs
+                            LoginUser();
+                            ClearLoginInput();
 
 
 
+                        }
                     }
-                }
-        );
+            );
 
 
 
-        // Registration assets
-        registerButton = (Button) findViewById(R.id.register);
-        rUsernameInput = (TextView) findViewById(R.id.rusername);
-        rPasswordInput = (TextView) findViewById(R.id.rpassword);
+            // Registration assets
+            registerButton = (Button) findViewById(R.id.register);
+            rUsernameInput = (TextView) findViewById(R.id.rusername);
+            rPasswordInput = (TextView) findViewById(R.id.rpassword);
 
-		registerButton.setOnClickListener(
-				new Button.OnClickListener() {
-					public void onClick(View v) {
+            registerButton.setOnClickListener(
+                    new Button.OnClickListener() {
+                        public void onClick(View v) {
 
-                        // assisgn values to string
-                        riUsername = rUsernameInput.getText().toString();
-						riPassword = rPasswordInput.getText().toString();
-
-
-                        // Parse & Clear Inputs
-                        RegisterUser();
-                        ClearRegisterInput();
+                            // assisgn values to string
+                            riUsername = rUsernameInput.getText().toString();
+                            riPassword = rPasswordInput.getText().toString();
 
 
+                            // Parse & Clear Inputs
+                            RegisterUser();
+                            ClearRegisterInput();
 
-					}
-				}
-		);
+
+
+                        }
+                    }
+            );
+
+
 
 
 
@@ -115,6 +132,20 @@ public class ParseStarterProjectActivity extends Activity {
 
     public void LoginUser(){
 
+        checkbox = (CheckBox) findViewById(R.id.checkbox);
+        if(checkbox.isChecked()){
+
+            user = liUsername;
+            pass = liPassword;
+            writeFile(user, pass);
+
+
+        }
+        else {
+            // Checkbox was not clicked
+            user = null;
+            pass = null;
+        }
 
         Log.i(
                 "USER INFO",
@@ -125,6 +156,7 @@ public class ParseStarterProjectActivity extends Activity {
             @Override
             public void done(ParseUser parseUser, com.parse.ParseException e) {
                 if (parseUser != null) {
+
 
 
                     progress = ProgressDialog.show(ParseStarterProjectActivity.this,
@@ -138,8 +170,6 @@ public class ParseStarterProjectActivity extends Activity {
                     handler.postDelayed(new Runnable() {
                         public void run() {
 
-
-
                             // close progress dialog
                             progress.dismiss();
 
@@ -149,8 +179,6 @@ public class ParseStarterProjectActivity extends Activity {
                             // log in user and move to contact list w/time delay
                             Intent loginIntent = new Intent(ParseStarterProjectActivity.this, UserActivity.class);
                             startActivity(loginIntent);
-
-
 
                         }}, 2000);
 
@@ -187,6 +215,93 @@ public class ParseStarterProjectActivity extends Activity {
     // TODO - DELETE LOCAL STORAGE OF CREDENTIALS WHEN USER CLICKS LOGOUT
 
     // TODO - AUTO LOGIN USER IF THERE ARE CREDENTIALS IN LOCAL STORAGE
+
+    private void writeFile(String username, String password) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("user.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(username);
+            outputStreamWriter.close();
+            Log.i("SAVED", "Username: " + username);
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("pass.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(password);
+            outputStreamWriter.close();
+            Log.i("SAVED", "Password: " + password);
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+
+    private String readPass() {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = openFileInput("pass.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+                Log.i("SAVED", "ret var = " + ret);
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+        user = ret;
+
+        return ret;
+    }
+
+    private String readUser() {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = openFileInput("user.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+                Log.i("SAVED", "ret var = " + ret);
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        pass = ret;
+        return ret;
+    }
 
 
 
