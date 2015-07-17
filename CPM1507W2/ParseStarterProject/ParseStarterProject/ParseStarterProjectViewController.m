@@ -5,8 +5,8 @@
 //
 
 #import "ParseStarterProjectViewController.h"
-
-#import <Parse/Parse.h>
+#import "Parse/Parse.h"
+#import "UserViewController.h"
 
 @implementation ParseStarterProjectViewController
 
@@ -22,6 +22,8 @@
     self.password = self.lpinput.text;
     
     NSLog(@"You Logged %@",self.username);
+    
+    [self loginUser];
     
     
 }
@@ -46,9 +48,9 @@
     
     
     // Test object for Parse
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
+    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    //testObject[@"foo"] = @"bar";
+    //[testObject saveInBackground];
     
  
     
@@ -57,9 +59,9 @@
 
 - (void) loadUserPage {
     
-    UserViewController *userViewController = [[UserViewController alloc] initWithNibName:@"User" bundle:nil];
-    
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    UserViewController *userViewController = [[UserViewController alloc] initWithNibName:nil bundle:nil];
+    [self presentViewController:userViewController animated:YES completion:NULL];
+    //[self.navigationController pushViewController:userViewController animated:YES];
     //[detailViewController release];  // Do that if you don't ARC.
     
 }
@@ -73,11 +75,15 @@
         if (user) {
             
             // Do stuff after successful login.
+            NSLog(@"Sucessful Login!");
+            [self loadUserPage];
+            
             
         }
         else {
             
             // The login failed. Check error to see why.
+            NSLog(@"Login ERROR!");
             
         }
         
@@ -104,7 +110,10 @@
             
             
         }
-        else {   NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
+        else {
+            
+            NSString *errorString = [error userInfo][@"error"];
+            NSLog(@"%@", errorString);
         }
     }];
     

@@ -7,24 +7,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserViewController">
             <connections>
+                <outlet property="addButton" destination="XSG-nf-7G5" id="AAB-3S-L5U"/>
+                <outlet property="contactTable" destination="jhM-dr-bFr" id="1kR-YS-cb2"/>
+                <outlet property="logOutButton" destination="v9V-k6-jb3" id="TMk-i8-fYF"/>
+                <outlet property="loginInfo" destination="PG3-wI-6lV" id="Zam-RC-dEm"/>
+                <outlet property="nameInput" destination="D3V-CH-pjc" id="USP-uw-qYs"/>
+                <outlet property="numberInput" destination="u4Q-7k-XbC" id="R3c-uP-wNh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9V-k6-jb3">
-                    <rect key="frame" x="223" y="30" width="81" height="30"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <state key="normal" title="Log Out">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="311" y="52" width="81" height="30"/>
-                    </variation>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged In As: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PG3-wI-6lV">
                     <rect key="frame" x="16" y="38" width="112" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
@@ -42,12 +38,12 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="8" y="215" width="384" height="44"/>
+                        <rect key="frame" x="19" y="220" width="281" height="44"/>
                     </variation>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzj-Ir-mTE">
                     <rect key="frame" x="16" y="109" width="70" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
@@ -56,7 +52,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5e-9h-dGx">
                     <rect key="frame" x="16" y="148" width="70" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
@@ -68,7 +64,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="104" y="128" width="288" height="30"/>
+                        <rect key="frame" x="104" y="127" width="196" height="30"/>
                     </variation>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u4Q-7k-XbC">
@@ -76,7 +72,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="104" y="166" width="288" height="30"/>
+                        <rect key="frame" x="104" y="166" width="196" height="30"/>
                     </variation>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jhM-dr-bFr">
@@ -86,11 +82,24 @@
                         <rect key="frame" x="0.0" y="285" width="400" height="315"/>
                     </variation>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9V-k6-jb3">
+                    <rect key="frame" x="223" y="30" width="81" height="30"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <state key="normal" title="Log Out">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="240" y="52" width="60" height="30"/>
+                    </variation>
+                    <connections>
+                        <action selector="logOut:" destination="-1" eventType="touchUpInside" id="tUk-GA-5Wj"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="v9V-k6-jb3"/>
                     <exclude reference="PG3-wI-6lV"/>
                     <exclude reference="XSG-nf-7G5"/>
                     <exclude reference="qzj-Ir-mTE"/>
@@ -98,11 +107,11 @@
                     <exclude reference="D3V-CH-pjc"/>
                     <exclude reference="u4Q-7k-XbC"/>
                     <exclude reference="jhM-dr-bFr"/>
+                    <exclude reference="v9V-k6-jb3"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
-                    <include reference="v9V-k6-jb3"/>
                     <include reference="PG3-wI-6lV"/>
                     <include reference="XSG-nf-7G5"/>
                     <include reference="qzj-Ir-mTE"/>
@@ -110,8 +119,10 @@
                     <include reference="D3V-CH-pjc"/>
                     <include reference="u4Q-7k-XbC"/>
                     <include reference="jhM-dr-bFr"/>
+                    <include reference="v9V-k6-jb3"/>
                 </mask>
             </variation>
+            <point key="canvasLocation" x="382.5" y="287"/>
         </view>
     </objects>
 </document>
