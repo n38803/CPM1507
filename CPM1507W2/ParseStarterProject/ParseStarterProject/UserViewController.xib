@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserViewController">
             <connections>
                 <outlet property="addButton" destination="XSG-nf-7G5" id="AAB-3S-L5U"/>
-                <outlet property="contactTable" destination="jhM-dr-bFr" id="1kR-YS-cb2"/>
                 <outlet property="logOutButton" destination="v9V-k6-jb3" id="TMk-i8-fYF"/>
                 <outlet property="loginInfo" destination="PG3-wI-6lV" id="Zam-RC-dEm"/>
                 <outlet property="nameInput" destination="D3V-CH-pjc" id="USP-uw-qYs"/>
                 <outlet property="numberInput" destination="u4Q-7k-XbC" id="R3c-uP-wNh"/>
+                <outlet property="tableView" destination="jhM-dr-bFr" id="v0r-BC-qPG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -40,6 +40,9 @@
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="19" y="220" width="281" height="44"/>
                     </variation>
+                    <connections>
+                        <action selector="addContact:" destination="-1" eventType="touchUpInside" id="fGF-he-42v"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzj-Ir-mTE">
                     <rect key="frame" x="16" y="109" width="70" height="21"/>
@@ -81,6 +84,10 @@
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="0.0" y="285" width="400" height="315"/>
                     </variation>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LW6-KB-S0P"/>
+                        <outlet property="delegate" destination="-1" id="6jt-PO-QJX"/>
+                    </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9V-k6-jb3">
                     <rect key="frame" x="223" y="30" width="81" height="30"/>
