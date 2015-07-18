@@ -119,7 +119,7 @@
                 // The object has been saved.
                 NSLog(@"%@ has been added", _contactname);
                 
-                
+
                 
                 // refresh tableview
                 [self queryParse];
@@ -141,11 +141,6 @@
     
     
     
-}
-
-
--(void)test:(UIAlertView*)x{
-    [x dismissWithClickedButtonIndex:-1 animated:YES];
 }
 
 - (void)logOut {

@@ -49,7 +49,7 @@
       <file leaf-file-name="UserActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/UserActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44716692">
+            <state vertical-scroll-proportion="0.3323124">
               <caret line="75" column="38" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -1578,8 +1578,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="83" />
-    <option name="y" value="57" />
+    <option name="x" value="87" />
+    <option name="y" value="199" />
     <option name="width" value="1357" />
     <option name="height" value="824" />
   </component>
@@ -1942,7 +1942,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="83" y="57" width="1357" height="824" extended-state="1" />
+    <frame x="87" y="199" width="1357" height="824" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2257,7 +2257,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ParseStarterProject/src/com/parse/starter/UserActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44716692">
+        <state vertical-scroll-proportion="0.3323124">
           <caret line="75" column="38" selection-start-line="75" selection-start-column="33" selection-end-line="75" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />

@@ -39,6 +39,8 @@
 @property BOOL *valid;
 
 
+
+
 //@property (weak, nonatomic) IBOutlet UITableView *contactTable;
 
 @end
