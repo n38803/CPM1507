@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserViewController">
             <connections>
                 <outlet property="addButton" destination="XSG-nf-7G5" id="AAB-3S-L5U"/>
+                <outlet property="editToggle" destination="Qnc-qd-i2J" id="u2F-Vj-9pd"/>
                 <outlet property="logOutButton" destination="v9V-k6-jb3" id="TMk-i8-fYF"/>
                 <outlet property="loginInfo" destination="PG3-wI-6lV" id="Zam-RC-dEm"/>
                 <outlet property="nameInput" destination="D3V-CH-pjc" id="USP-uw-qYs"/>
@@ -21,10 +22,23 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9V-k6-jb3">
+                    <rect key="frame" x="223" y="30" width="81" height="30"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <state key="normal" title="Log Out">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="240" y="52" width="60" height="30"/>
+                    </variation>
+                    <connections>
+                        <action selector="logOut:" destination="-1" eventType="touchUpInside" id="tUk-GA-5Wj"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged In As: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PG3-wI-6lV">
                     <rect key="frame" x="16" y="38" width="112" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="19" y="61" width="112" height="21"/>
@@ -33,12 +47,13 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSG-nf-7G5">
                     <rect key="frame" x="16" y="186" width="288" height="44"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <state key="normal" title="ADD NEW CONTACT">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="19" y="220" width="281" height="44"/>
+                        <rect key="frame" x="19" y="220" width="137" height="44"/>
                     </variation>
                     <connections>
                         <action selector="addContact:" destination="-1" eventType="touchUpInside" id="fGF-he-42v"/>
@@ -47,7 +62,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzj-Ir-mTE">
                     <rect key="frame" x="16" y="109" width="70" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="19" y="131" width="70" height="21"/>
@@ -56,7 +71,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5e-9h-dGx">
                     <rect key="frame" x="16" y="148" width="70" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="19" y="170" width="70" height="21"/>
@@ -82,31 +97,37 @@
                     <rect key="frame" x="0.0" y="251" width="320" height="297"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="285" width="400" height="315"/>
+                        <rect key="frame" x="0.0" y="272" width="319" height="276"/>
                     </variation>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="LW6-KB-S0P"/>
                         <outlet property="delegate" destination="-1" id="6jt-PO-QJX"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9V-k6-jb3">
-                    <rect key="frame" x="223" y="30" width="81" height="30"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                    <state key="normal" title="Log Out">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Qnc-qd-i2J">
+                    <rect key="frame" x="-25" y="-15" width="51" height="31"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="240" y="52" width="60" height="30"/>
+                        <rect key="frame" x="228" y="226" width="51" height="31"/>
                     </variation>
                     <connections>
-                        <action selector="logOut:" destination="-1" eventType="touchUpInside" id="tUk-GA-5Wj"/>
+                        <action selector="editContact:" destination="-1" eventType="valueChanged" id="szp-h8-T3b"/>
                     </connections>
-                </button>
+                </switch>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EDIT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-Zo-lg6">
+                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="240" y="204" width="37" height="21"/>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="subviews">
+                    <exclude reference="v9V-k6-jb3"/>
                     <exclude reference="PG3-wI-6lV"/>
                     <exclude reference="XSG-nf-7G5"/>
                     <exclude reference="qzj-Ir-mTE"/>
@@ -114,11 +135,13 @@
                     <exclude reference="D3V-CH-pjc"/>
                     <exclude reference="u4Q-7k-XbC"/>
                     <exclude reference="jhM-dr-bFr"/>
-                    <exclude reference="v9V-k6-jb3"/>
+                    <exclude reference="Qnc-qd-i2J"/>
+                    <exclude reference="c1Q-Zo-lg6"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
+                    <include reference="v9V-k6-jb3"/>
                     <include reference="PG3-wI-6lV"/>
                     <include reference="XSG-nf-7G5"/>
                     <include reference="qzj-Ir-mTE"/>
@@ -126,7 +149,8 @@
                     <include reference="D3V-CH-pjc"/>
                     <include reference="u4Q-7k-XbC"/>
                     <include reference="jhM-dr-bFr"/>
-                    <include reference="v9V-k6-jb3"/>
+                    <include reference="Qnc-qd-i2J"/>
+                    <include reference="c1Q-Zo-lg6"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="382.5" y="287"/>
