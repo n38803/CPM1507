@@ -36,6 +36,7 @@
 @property NSMutableArray *contactArray;
 @property NSString *contactname;
 @property NSString *contactnumber;
+@property BOOL *valid;
 
 
 //@property (weak, nonatomic) IBOutlet UITableView *contactTable;

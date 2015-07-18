@@ -47,14 +47,31 @@
     [super viewDidLoad];
     
     
-    // Test object for Parse
-    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    //testObject[@"foo"] = @"bar";
-    //[testObject saveInBackground];
+    // Check to see if a user opted to stay logged in
+    [self detectUser];
     
  
     
 
+}
+
+- (void) detectUser {
+    
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        
+        NSLog(@"CURRENT USER");
+        //self.username = [NSString stringWithFormat:@"%@",[[PFUser currentUser]valueForKey:@"username"]];
+        //self.password = [NSString stringWithFormat:@"%@",[[PFUser currentUser]valueForKey:@"password"]];
+        
+        // bypass login screen
+        [self loadUserPage];
+        
+    } else {
+        // show the signup or login screen
+        NSLog(@"NO CURRENT USER");
+        
+    }
 }
 
 - (void) loadUserPage {
