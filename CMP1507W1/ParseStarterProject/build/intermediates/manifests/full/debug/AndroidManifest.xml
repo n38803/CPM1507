@@ -40,6 +40,16 @@
             android:name="com.parse.starter.AddActivity"
             android:label="Add to your Contacts" >
         </activity>
+
+        <receiver android:name="com.parse.starter.CheckConnectionService" >
+            <intent-filter>
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.parse.starter.CheckParseService" >
+        </service>
     </application>
 
 </manifest>
